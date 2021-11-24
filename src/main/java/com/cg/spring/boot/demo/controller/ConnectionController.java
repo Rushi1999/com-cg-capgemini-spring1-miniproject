@@ -55,7 +55,7 @@ public class ConnectionController {
 //	public List<Connection> findActiveConnectionsByVillage(String villageName)throws NoSuchConnectionException;
 	
 	@GetMapping("/getActiveConnectionbyname/{villageName}")
-	public List<Connection>findActiveConnectionsByVillage(@PathVariable String villageName) {
+	public List<Connection>findActiveConnectionsByVillage(@PathVariable String villageName)  {
 		LOG.info("getActiveConnectionByVillageName");
 		return connectionService.findActiveConnectionsByVillage(villageName);
 	}
@@ -69,11 +69,11 @@ public class ConnectionController {
 //		return connectionService.findActiveConnectionsByTaluka(taluka);
 //	}
 
-//	@GetMapping("/getActiveConnectionbyname/{taluka}")
-//	public List<Connection>findActiveConnectionsByTaluka(@PathVariable String taluka){
-//		LOG.info("getActiveConnectionByTaluka");
-//		return connectionService.findActiveConnectionsByTaluka(taluka);
-//	}
+	@GetMapping("/getActiveConnectionbyname/{taluka}")
+	public List<Connection>findActiveConnectionsByTaluka(@PathVariable String taluka){
+		LOG.info("getActiveConnectionByTaluka");
+		return connectionService.findActiveConnectionsByTaluka(taluka);
+	}
 	
 	
 //	public List<Connection> findActiveConnectionsByDistrict(String districtName)throws NoSuchConnectionException;

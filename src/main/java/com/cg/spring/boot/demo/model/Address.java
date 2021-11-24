@@ -21,31 +21,32 @@ public class Address {
 	 @Column
 	private String landmark;
 	 @Column
-	private String village;
+	private String villageName;
 	 @Column
 	private String taluka;
 	 @Column
-	private String district;
+	private String districtName;
 	 @Column
 	private String state;
 	 @Column
 	private Integer pincode;
-	
-	public Address()
-	{
+	 
+	 
+	 
+	public Address() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Address(Long addressId, int flatOrHouseNumber, String buildingName, String landmark, String village,
-			String taluka, String district, String state, Integer pincode) {
+	public Address(Long addressId, int flatOrHouseNumber, String buildingName, String landmark, String villageName,
+			String taluka, String districtName, String state, Integer pincode) {
 		super();
 		this.addressId = addressId;
 		this.flatOrHouseNumber = flatOrHouseNumber;
 		this.buildingName = buildingName;
 		this.landmark = landmark;
-		this.village = village;
+		this.villageName = villageName;
 		this.taluka = taluka;
-		this.district = district;
+		this.districtName = districtName;
 		this.state = state;
 		this.pincode = pincode;
 	}
@@ -73,11 +74,11 @@ public class Address {
 	public void setLandmark(String landmark) {
 		this.landmark = landmark;
 	}
-	public String getVillage() {
-		return village;
+	public String getVillageName() {
+		return villageName;
 	}
-	public void setVillage(String village) {
-		this.village = village;
+	public void setVillageName(String villageName) {
+		this.villageName = villageName;
 	}
 	public String getTaluka() {
 		return taluka;
@@ -85,11 +86,11 @@ public class Address {
 	public void setTaluka(String taluka) {
 		this.taluka = taluka;
 	}
-	public String getDistrict() {
-		return district;
+	public String getDistrictName() {
+		return districtName;
 	}
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
 	}
 	public String getState() {
 		return state;
@@ -106,9 +107,12 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [addressId=" + addressId + ", flatOrHouseNumber=" + flatOrHouseNumber + ", buildingName="
-				+ buildingName + ", landmark=" + landmark + ", village=" + village + ", taluka=" + taluka
-				+ ", district=" + district + ", state=" + state + ", pincode=" + pincode + "]";
+				+ buildingName + ", landmark=" + landmark + ", villageName=" + villageName + ", taluka=" + taluka
+				+ ", districtName=" + districtName + ", state=" + state + ", pincode=" + pincode + "]";
 	}
+	 
+	 
+	
 	
 	
 }

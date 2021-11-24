@@ -1,15 +1,13 @@
 package com.cg.spring.boot.demo.service;
 
 import java.util.List;
-import com.cg.spring.boot.demo.repository.ConnectionRespository;
-
 import  com.cg.spring.boot.demo.exception.NoSuchConnectionException;
 import  com.cg.spring.boot.demo.exception.NoSuchCustomerException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cg.spring.boot.demo.model.Connection;
 import com.cg.spring.boot.demo.model.Customer;
+import com.cg.spring.boot.demo.model.Address;
 import com.cg.spring.boot.demo.service.ConnectionService;
 
 public interface ConnectionService {
@@ -20,10 +18,16 @@ public interface ConnectionService {
 	// suspend or activate connection
 	public Connection modifyConnection(Connection connection);
 	
-	@Query(name = "SELECT e FROM address_table WHERE e.villageName=?")
+//	@Query(name = "SELECT e FROM address_table WHERE e.villageName=?")
 	public List<Connection> findActiveConnectionsByVillage(String villageName)throws NoSuchConnectionException;
+	
+//	@Query(name = "SELECT e FROM address_table WHERE e.taluka=?")
 	public List<Connection> findActiveConnectionsByTaluka(String taluka)throws NoSuchConnectionException;
+	
+//	@Query(name = "SELECT e FROM address_table WHERE e.districtName=?")
 	public List<Connection> findActiveConnectionsByDistrict(String districtName)throws NoSuchConnectionException;
+	
+	
 	public List<Connection> findActiveConnectionsByPincode(Integer pincode)throws NoSuchConnectionException;
 //	public Connection findActiveConnectionsByPincode(int pincode)throws NoSuchConnectionException;
 

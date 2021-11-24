@@ -13,7 +13,7 @@ import com.cg.spring.boot.demo.model.Customer;
 import com.cg.spring.boot.demo.repository.ConnectionRespository;
 import com.cg.spring.boot.demo.controller.ConnectionController;
 import com.cg.spring.boot.demo.service.ConnectionService;
-import com.cg.spring.boot.demo.repository.UserRepository;
+import com.cg.spring.boot.demo.repository.AddressRespository;
 
 @Service
 class ConnectionServiceImpliment implements  ConnectionService
@@ -21,8 +21,9 @@ class ConnectionServiceImpliment implements  ConnectionService
 
 	 @Autowired
 	    private ConnectionRespository connectionRepository;
-//	 @Autowired
-//	    private UserRepository userRepository;
+	 
+	 @Autowired
+	    private AddressRespository addressRepository;
 	 
 
 @Override
@@ -79,10 +80,9 @@ class ConnectionServiceImpliment implements  ConnectionService
 	@Override
 	public List<Connection> findActiveConnectionsByVillage(String villageName) throws NoSuchConnectionException {
 		
-//		System.out.println("getActiveConnectionByVillageName");
-//			return connectionRepository.findByVillageName(villageName);
-		
-			return null;
+		System.out.println("getActiveConnectionByVillageName");
+			return connectionRepository.readActiveConnectionsByVillage(villageName);		
+//			return null;
 		
 	}
 
