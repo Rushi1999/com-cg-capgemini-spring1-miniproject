@@ -40,8 +40,9 @@ public class Customer
 	 @Column(name="email")
 	private String email;
 	 
-//	 @Enumerated(EnumType.STRING)
+	 
 	@Column(name = "gender")
+//	@Enumerated(EnumType.STRING)
 	private String gender;
 	 
 	 

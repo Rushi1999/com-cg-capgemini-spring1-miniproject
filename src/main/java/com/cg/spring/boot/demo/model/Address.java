@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "address_table") 
 public class Address {
-	// should be auto-generated and used for internal purpose
+	//auto-generated Id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long addressId;
@@ -29,16 +29,15 @@ public class Address {
 	 @Column
 	private String state;
 	 @Column
-	private Integer pincode;
+	private Long pincode;
 	 
 	 
 	 
 	public Address() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Address(Long addressId, int flatOrHouseNumber, String buildingName, String landmark, String villageName,
-			String taluka, String districtName, String state, Integer pincode) {
+			String taluka, String districtName, String state, Long pincode) {
 		super();
 		this.addressId = addressId;
 		this.flatOrHouseNumber = flatOrHouseNumber;
@@ -98,10 +97,10 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Integer getPincode() {
+	public Long getPincode() {
 		return pincode;
 	}
-	public void setPincode(Integer pincode) {
+	public void setPincode(Long pincode) {
 		this.pincode = pincode;
 	}
 	@Override

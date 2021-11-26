@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.spring.boot.demo.exception.NoSuchConnectionException;
 import com.cg.spring.boot.demo.model.Connection;
 import com.cg.spring.boot.demo.service.ConnectionService;
-import com.cg.spring.boot.demo.repository.AddressRespository;
 
 
 
@@ -28,69 +27,39 @@ public class ConnectionController {
 
     @Autowired
     private ConnectionService connectionService;
-    @Autowired
-    private AddressRespository  addressRespository ;
-
-    @PostMapping("/newConnection")
-    public Connection addConnection(@RequestBody Connection connection) {
+    
+    /* */
+ // http://localhost:8082/registerCustomer
+    @PostMapping("/createConnection")
+    public Connection addConnection(@RequestBody Connection connection) throws NoSuchConnectionException {
         System.out.println("add new connection");
         return connectionService.newConnectionRequest(connection);
     }
-
-//    @PostMapping("/createConnection")
-//    public Connection addConnection(@RequestBody Connection connection) {
-//        System.out.println("add new connection");
-//        return connectionService.createConnection(connection);
-//    }
-//
     
 //	public Connection modifyConnectionAddress(Connection connection);
 	
-	@PutMapping("/updateconnection")
-	public Connection updateEmp(@RequestBody Connection connection) {
-		System.out.println("Controller updateConnection");
+ // http://localhost:8082/modifyConnectionAddress
+	@PutMapping("/modifyConnectionAddress")
+	public Connection updateAddress(@RequestBody Connection connection) {
+		System.out.println("Controller updateConnectionAdddress");
 		return connectionService.modifyConnectionAddress(connection);
 	}
 	
-//	public List<Connection> findActiveConnectionsByVillage(String villageName)throws NoSuchConnectionException;
-	
-	@GetMapping("/getActiveConnectionbyname/{villageName}")
-	public List<Connection>findActiveConnectionsByVillage(@PathVariable String villageName)  {
-		LOG.info("getActiveConnectionByVillageName");
-		return connectionService.findActiveConnectionsByVillage(villageName);
+	// http://localhost:8082/modifyConnection
+	@PutMapping("/modifyConnection")
+	public Connection updateConnection(@RequestBody Connection connection) throws NoSuchConnectionException {
+		System.out.println("Controller updateConnection");
+		return connectionService. modifyConnection(connection);
 	}
 	
 	
-//	public List<Connection> findActiveConnectionsByTaluka(String taluka)throws NoSuchConnectionException;
+//	public List<Connection> findConnectionsByPincode(String pincode)throws NoSuchConnectionException;
 	
-//	@GetMapping("/getActiveConnectionbyname/{taluka}")
-//	public List<Connection>findActiveConnectionsByTaluka(@PathVariable String taluka) throws NoSuchConnectionException {
-//		LOG.info("getActiveConnectionByTaluka");
-//		return connectionService.findActiveConnectionsByTaluka(taluka);
-//	}
-
-	@GetMapping("/getActiveConnectionbyname/{taluka}")
-	public List<Connection>findActiveConnectionsByTaluka(@PathVariable String taluka){
-		LOG.info("getActiveConnectionByTaluka");
-		return connectionService.findActiveConnectionsByTaluka(taluka);
-	}
-	
-	
-//	public List<Connection> findActiveConnectionsByDistrict(String districtName)throws NoSuchConnectionException;
-	
-//	@GetMapping("/getActiveConnectionbyDistrictName/{districtName}")
-//	public List<Connection>findActiveConnectionsByVillage(@PathVariable String districtName)  {
-//		LOG.info("getActiveConnectionByVillageName");
-//		return connectionService.findActiveConnectionsByVillage(districtName);
-//	}
-//	
-	
-//	public List<Connection> findActiveConnectionsByPincode(String pincode)throws NoSuchConnectionException;
-	
-	@GetMapping("/getActiveConnectionbypincode/{pincode}")
-	public ResponseEntity<Connection> findActiveConnectionsByPincode(@PathVariable(name = "pincode") Integer pincode) throws NoSuchConnectionException {
+	// http://localhost:8082/getConnectionbypincode/{pincode}
+	@GetMapping("/getConnectionbypincode/{pincode}")
+	public ResponseEntity<Connection> findActiveConnectionsByPincode(@PathVariable(name = "pincode")Long pincode) throws NoSuchConnectionException {
 		LOG.info("getConnectionById");
-		List<Connection> connt = connectionService.findActiveConnectionsByPincode(pincode); 
+		List<Connection> connt = connectionService.findConnectionsByPincode(pincode); 
 		LOG.info(connt.toString());
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "This consumer is available in the database.");
@@ -99,41 +68,16 @@ public class ConnectionController {
 		return response;
 	}
 	
+//	public List<Connection> findConnectionsById(Long connectionId)throws NoSuchConnectionException;
 	
-	
-//	public List<Connection> findInactiveConnectionsByVillage(String villageName)throws NoSuchConnectionException;
-	
-	@GetMapping("/getInActiveConnectionbyname/{villageName}")
-	public List<Connection>findInactiveConnectionsByVillage(@PathVariable String villageName) throws NoSuchConnectionException {
-		LOG.info("getInactiveConnectionByVillageName");
-		return connectionService.findInactiveConnectionsByVillage(villageName);
-	}	
-	
-//	public List<Connection> findInactiveConnectionsByTaluka(String taluka)throws NoSuchConnectionException;
-	
-	@GetMapping("/getInActiveConnectionbyname/{taluka}")
-	public List<Connection> findInactiveConnectionsByTaluka(@PathVariable String taluka) throws NoSuchConnectionException {
-		LOG.info("getInActiveConnectionByTaluka");
-		return connectionService.findInactiveConnectionsByTaluka(taluka);
-	}
-	
-//	public List<Connection> findInactiveConnectionsByDistrict(String districtName)throws NoSuchConnectionException;
-	
-	@GetMapping("/getInActiveConnectionbyDistrictName/{districtName}")
-	public List<Connection>findInactiveConnectionsByDistrict(@PathVariable String districtName) throws NoSuchConnectionException {
-		LOG.info("getActiveConnectionByVillageName");
-		return connectionService.findInactiveConnectionsByDistrict(districtName);
-	}
-	
-//	public List<Connection> findInactiveConnectionsByPincode(String pincode)throws NoSuchConnectionException;
-	
-	@GetMapping("/getInActiveConnectionbypincode/{pincode}")
-	public ResponseEntity<Connection> findInactiveConnectionsByPincode(@PathVariable(name = "pincode") Integer pincode) throws NoSuchConnectionException {
-		LOG.info("getEmpById");
-		List<Connection> connt = connectionService.findInactiveConnectionsByPincode(pincode); 
+	// http://localhost:8082/getConnectionbyId/{connectionId}
+	@GetMapping("/getConnectionbyId/{connectionId}")
+	public ResponseEntity<Connection>findConnectionById(@PathVariable(name = "connectionId")Long i) throws NoSuchConnectionException {
+		LOG.info("getConnectionById");
+		Connection connt = connectionService.findConnectionById(i); 
 		LOG.info(connt.toString());
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "This consumer is available in the database.");
+		headers.add("message", "This connection is available in the database.");
 		LOG.info(headers.toString());
 		ResponseEntity<Connection> response = new ResponseEntity<Connection>(HttpStatus.OK);
 		return response;

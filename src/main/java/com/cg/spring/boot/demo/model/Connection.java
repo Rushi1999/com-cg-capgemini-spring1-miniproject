@@ -11,41 +11,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.persistence.CascadeType;
 
-//import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "connection_table") 
-public class Connection {
+public class Connection{
 	// should be auto-generated for internal purpose
-//	private static final long serialVersionUID = -777826216252556657L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer connectionId;
-	// should be auto-generated
-//	@GeneratedValue(strategy=TABLE, generator="CUST_GEN")
-//	@Column
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long connectionId;
 	
-//    @Column (name="consumerNumber")
-//	private Long consumerNumber;
-	
+	// customerId auto-generated
     @OneToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name= "customerConnection",referencedColumnName = "customerId")
 	private Customer customer;
 	
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @OneToOne (fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//    @JoinColumn(name= "address",referencedColumnName = "addressid")
-//    
-    @ManyToOne
-	@JoinColumn(name = "addressid")
+   
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name= "address",referencedColumnName = "addressId")
     private Address address;
 	
     
@@ -60,19 +47,20 @@ public class Connection {
 	
     @Column(name = "connectionStatus")
     @Pattern(regexp = "^[A|I]{1}$", message ="Must be Active or Inactive")
-//    @Enumerated(EnumType.STRING)
-	// connectionStatus will be active or inactive
 	private boolean connectionStatus;
 	
 	public Connection()
 	{
 		super();
 	}
-	public Connection(Integer connectionId, Long consumerNumber, Customer customerConnection, Address address, ConnectionType connectionType, LocalDate applicationDate, LocalDate connectionDate, boolean connectionStatus) {
+
+
+	public Connection(Long connectionId, Customer customer, Address address, ConnectionType connectionType,
+			LocalDate applicationDate, LocalDate connectionDate,
+			@Pattern(regexp = "^[A|I]{1}$", message = "Must be Active or Inactive") boolean connectionStatus) {
 		super();
 		this.connectionId = connectionId;
-//		this.consumerNumber = consumerNumber;
-//		this.customerConnection = customerConnection;
+		this.customer = customer;
 		this.address = address;
 		this.connectionType = connectionType;
 		this.applicationDate = applicationDate;
@@ -80,10 +68,11 @@ public class Connection {
 		this.connectionStatus = connectionStatus;
 	}
 
-	public Integer getConnectionId() {
+
+	public Long getConnectionId() {
 		return connectionId;
 	}
-	public void setConnectionId(Integer connectionId) {
+	public void setConnectionId(Long connectionId) {
 		this.connectionId = connectionId;
 	}
 	public Customer getCustomer() {
@@ -116,23 +105,13 @@ public class Connection {
 	public void setConnectionDate(LocalDate connectionDate) {
 		this.connectionDate = connectionDate;
 	}
-//	public Long getConsumerNumber() {
-//		return consumerNumber;
-//	}
-//	public void setConsumerNumber(Long consumerNumber) {
-//		this.consumerNumber = consumerNumber;
-//	}
 
 	@Override
 	public String toString() {
-		return "Connection{" +
-				"connectionId=" + connectionId +
-				", customer=" + customer +
-				", address=" + address +
-				", connectionType=" + connectionType +
-				", applicationDate=" + applicationDate +
-				", connectionDate=" + connectionDate +
-				", connectionStatus=" + connectionStatus +
-				'}';
+		return "Connection [connectionId=" + connectionId + ", customer=" + customer + ", address=" + address
+				+ ", connectionType=" + connectionType + ", applicationDate=" + applicationDate + ", connectionDate="
+				+ connectionDate + ", connectionStatus=" + connectionStatus + "]";
 	}
+
+	
 }

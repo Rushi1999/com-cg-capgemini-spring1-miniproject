@@ -7,12 +7,8 @@ import org.springframework.stereotype.Repository;
 import  com.cg.spring.boot.demo.model.Address;
 
 @Repository
-public interface  AddressRespository extends JpaRepository<Address, Integer> {
+public interface  AddressRespository<Connection> extends JpaRepository<Address, Long> {
 
-//	List<Connection> findByVillageName(String villageName);
-
-//	boolean existsById(Long connectionId);
-
-
-
+	public List<Connection> findByPincode(Long pincode);
+	
 }
